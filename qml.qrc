@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>ui/ToolBar/ToolBar.qml</file>
+        <file>ui/assets/bin.png</file>
+        <file>ui/assets/day-and-night.png</file>
+        <file>ui/assets/done.png</file>
+        <file>ui/assets/plus.png</file>
+        <file>ui/assets/stop-sign.png</file>
+        <file>ui/assets/uk.png</file>
+        <file>ui/assets/ukraine.png</file>
+        <file>ui/ToolBar/Tools.qml</file>
+        <file>ui/ToolBar/Languages.qml</file>
+        <file>ui/ToolBar/Searcher.qml</file>
+        <file>ui/ToolBar/Filters.qml</file>
+    </qresource>
+</RCC>
