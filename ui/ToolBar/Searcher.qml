@@ -1,20 +1,20 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15
+import StyleModule 1.0
 
 TextField{
     id: textSearch
 
     background: Rectangle{
         radius: 6
-        border.color: "black"
+        border.color: Style.borderColor
         border.width: 1
-        color: "#FF6868"
+        color: Style.lightColor
     }
-    text: qsTr("")
-    color: "black"
-    placeholderText: qsTr("Enter name")
-    placeholderTextColor: "#313131"
-    font.pixelSize: 20
+    color: Style.textColor
+    placeholderText: qsTr("Enter title")
+    placeholderTextColor: Style.text2Color
+    font.pixelSize: Style.defaultTextSize
     onTextChanged: {
         //
     }

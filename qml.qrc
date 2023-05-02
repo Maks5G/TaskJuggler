@@ -13,5 +13,11 @@
         <file>ui/ToolBar/Languages.qml</file>
         <file>ui/ToolBar/Searcher.qml</file>
         <file>ui/ToolBar/Filters.qml</file>
+        <file>ui/StyleModule/qmldir</file>
+        <file>ui/StyleModule/Style.qml</file>
+        <file>src/database.h</file>
+        <file>src/database.cpp</file>
+        <file>src/listmodel.h</file>
+        <file>src/listmodel.cpp</file>
     </qresource>
 </RCC>

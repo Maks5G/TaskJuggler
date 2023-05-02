@@ -1,5 +1,5 @@
 import QtQuick 2.15
-import QtQuick.Controls 2.15
+import StyleModule 1.0
 
 Rectangle{
     id: root
@@ -8,7 +8,7 @@ Rectangle{
         right: parent.right
     }
     height: 52
-    color: "#E84141"
+    color: Style.primaryColor
 
     Tools{
         id: tools
@@ -16,7 +16,7 @@ Rectangle{
             left: root.left
             top: root.top
             bottom: root.bottom
-            margins: 4
+            margins: Style.tinyOffset
         }
     }
 
@@ -26,30 +26,31 @@ Rectangle{
             left: tools.right
             top: root.top
             bottom: root.bottom
-            leftMargin: 10
+            leftMargin: Style.mediumOffset
         }
     }
 
     Image {
         id: dayAndNight
         source: "qrc:/ui/assets/day-and-night.png"
-        height: parent.height - 4
+        height: parent.height - Style.tinyOffset
         fillMode: Image.PreserveAspectFit
         anchors{
             verticalCenter: root.verticalCenter
             right: root.right
-            rightMargin: 4
+            rightMargin: Style.tinyOffset
         }
     }
 
     Rectangle{
         id: separator
         height: root.height
-        width: 2
+        width: 1
         anchors{
             right: dayAndNight.left
-            rightMargin: 4
+            rightMargin: Style.tinyOffset
         }
+        color: Style.borderColor
     }
 
     Languages{
@@ -58,7 +59,7 @@ Rectangle{
             right: separator.left
             top: root.top
             bottom: root.bottom
-            margins: 4
+            margins: Style.tinyOffset
         }
     }
 
@@ -69,8 +70,7 @@ Rectangle{
             bottom: root.bottom
             right: languages.left
             left: filterRow.right
-            margins: 4
+            margins: Style.tinyOffset
         }
     }
-
 }

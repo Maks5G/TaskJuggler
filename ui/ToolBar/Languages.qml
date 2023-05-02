@@ -1,8 +1,9 @@
 import QtQuick 2.15
+import StyleModule 1.0
 
 Row {
     id: languages
-    spacing: 4
+    spacing: Style.tinySpacing
 
     Image {
         id: englishIcon

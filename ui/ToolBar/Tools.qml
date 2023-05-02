@@ -1,34 +1,25 @@
 import QtQuick 2.15
+import StyleModule 1.0
 
 Row{
     id: toolsRow
-    spacing: 10
+    spacing: Style.mediumSpacing
 
-    Image {
-        id: plus
-        source: "qrc:/ui/assets/plus.png"
-        fillMode: Image.PreserveAspectFit
-        height: parent.height
+    ListModel {
+        id: model
+        ListElement {listId: "plus"; imgSource: "qrc:/ui/assets/plus.png";}
+        ListElement {listId: "bin"; imgSource: "qrc:/ui/assets/bin.png";}
+        ListElement {listId: "done"; imgSource: "qrc:/ui/assets/done.png";}
+        ListElement {listId: "holdOn"; imgSource: "qrc:/ui/assets/stop-sign.png";}
     }
 
-    Image {
-        id: bin
-        source: "qrc:/ui/assets/bin.png"
-        fillMode: Image.PreserveAspectFit
-        height: parent.height
-    }
-
-    Image {
-        id: done
-        source: "qrc:/ui/assets/done.png"
-        fillMode: Image.PreserveAspectFit
-        height: parent.height
-    }
-
-    Image {
-        id: holdOn
-        source: "qrc:/ui/assets/stop-sign.png"
-        fillMode: Image.PreserveAspectFit
-        height: parent.height
+    Repeater {
+        model: model
+        Image {
+            id: listId
+            source: imgSource
+            fillMode: Image.PreserveAspectFit
+            height: parent.height
+        }
     }
 }
