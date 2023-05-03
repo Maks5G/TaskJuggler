@@ -19,5 +19,8 @@
         <file>src/database.cpp</file>
         <file>src/listmodel.h</file>
         <file>src/listmodel.cpp</file>
+        <file>ui/TasksList/Tasks.qml</file>
+        <file>ui/TaskDescription/Description.qml</file>
+        <file>ui/assets/proccessing.png</file>
     </qresource>
 </RCC>

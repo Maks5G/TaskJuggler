@@ -2,7 +2,10 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15
 import QtQuick.Controls 1.4 as C1
 import QtQuick.Layouts 1.15
+import StyleModule 1.0
 import "ui/ToolBar"
+import "ui/TasksList"
+import "ui/TaskDescription"
 
 ApplicationWindow {
     property int minimumSubAreaWidth: 200
@@ -23,14 +26,19 @@ ApplicationWindow {
     C1.SplitView {
         id: splitView
         z: -1
-        anchors.fill: parent
+        anchors{
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+            top: toolBar.bottom
+        }
 
         handleDelegate: Rectangle {
                 id: handleDelegate
                 implicitWidth: 4
                 implicitHeight: 4
-                color: styleData.pressed ? "#81e889"
-                    : (styleData.hovered ? Qt.lighter("#c2f4c6", 1.1) : "#c2f4c6")
+                color: styleData.pressed ? Qt.darker(Style.lightColor, 1.1)
+                    : (styleData.hovered ? Qt.lighter(Style.primaryColor, 1.1) : Style.primaryColor)
 
                 containmentMask: Item {
                     x: (handleDelegate.width - width) / 2
@@ -38,30 +46,27 @@ ApplicationWindow {
                     height: splitView.height
                 }
             }
-
-        Rectangle{
-            id: blue
+        Tasks {
+            id: tasksView
             width: parent.width/3
             Layout.minimumWidth: minimumSubAreaWidth
             Layout.maximumWidth: parent.width / 2
             Layout.fillWidth: true
-            color: "lightblue"
             onWidthChanged: {
-                if(width >= 600){
+                if(width >= parent.width / 2){
                     Layout.fillWidth = false
-                    green.Layout.fillWidth = true
+                    descriptionView.Layout.fillWidth = true
                 }
             }
         }
-        Rectangle{
-            id: green
+        Description {
+            id: descriptionView
             width: parent.width*2/3
             Layout.minimumWidth: minimumSubAreaWidth
-            color: "lightgreen"
             onWidthChanged: {
                 if(width <= minimumSubAreaWidth){
                     Layout.fillWidth = false
-                    blue.Layout.fillWidth = true
+                    tasksView.Layout.fillWidth = true
                 }
             }
         }

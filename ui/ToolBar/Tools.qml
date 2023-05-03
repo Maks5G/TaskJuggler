@@ -1,5 +1,7 @@
 import QtQuick 2.15
 import StyleModule 1.0
+import QtQuick.Dialogs 1.3
+import "../TaskDescription"
 
 Row{
     id: toolsRow
@@ -20,6 +22,23 @@ Row{
             source: imgSource
             fillMode: Image.PreserveAspectFit
             height: parent.height
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    if(index == 0){
+                        dialog.open();
+                    }
+                }
+            }
         }
     }
+
+    Dialog{
+        id: dialog
+        title: "dialog"
+        width: 800
+        height: 600
+        //
+    }
+
 }

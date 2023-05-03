@@ -40,6 +40,12 @@ Rectangle{
             right: root.right
             rightMargin: Style.tinyOffset
         }
+        MouseArea {
+            anchors.fill: parent
+            onClicked: {
+                Style.isDarkTheme = !Style.isDarkTheme
+            }
+        }
     }
 
     Rectangle{

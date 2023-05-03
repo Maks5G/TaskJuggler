@@ -15,6 +15,7 @@ TextField{
     placeholderText: qsTr("Enter title")
     placeholderTextColor: Style.text2Color
     font.pixelSize: Style.defaultTextSize
+    selectByMouse: true
     onTextChanged: {
         //
     }
