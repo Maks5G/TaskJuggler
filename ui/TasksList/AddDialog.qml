@@ -1,15 +1,16 @@
 import QtQuick 2.15
+import QtQuick.Dialogs 1.3
 import QtQuick.Layouts 1.15
-import QtQuick.Controls 2.15
 import StyleModule 1.0
+import QtQuick.Controls 2.15
 
-Rectangle{
-    id: descriptionView
-    property alias title: title
-    property alias description: description
-    property alias btn: btn
 
-    color: Style.backgroundColor
+Dialog{
+    anchors.centerIn: parent
+    id: dialog
+    width: 800
+    height: 600
+    standardButtons: StandardButton.Cancel | StandardButton.Ok
     RowLayout{
         id: row
         anchors{
@@ -19,31 +20,17 @@ Rectangle{
             margins: Style.mediumOffset
         }
 
-        Text { text: qsTr("Title: "); color: Style.textColor; font.pixelSize: Style.defaultTextSize;}
+        Text { text: qsTr("Title: "); font.pixelSize: Style.defaultTextSize;}
         TextField {
             id: title
             Layout.fillWidth: true
             background: Rectangle{
                 radius: 6
-                border.color: Style.borderColor
                 border.width: 1
-                color: Style.delegateColor
             }
-            color: Style.textColor
             font.pixelSize: Style.defaultTextSize
             selectByMouse: true
-        }
-        Button {
-            id: btn
-            Layout.alignment: Qt.AlignVCenter
-            text: qsTr("Submit")
-            background: Rectangle{
-                radius: 6
-                border.color: Style.borderColor
-                border.width: 1
-                color: btn.pressed ? "gray" : "white"
-            }
-            font.pixelSize: Style.defaultTextSize
+            placeholderText: qsTr("Required field")
         }
     }
     ColumnLayout{
@@ -56,22 +43,30 @@ Rectangle{
         }
 
         id: column
-        Text { text: qsTr("Description: "); color: Style.textColor; font.pixelSize: Style.defaultTextSize; Layout.alignment: Qt.AlignHCenter}
+        Text { text: qsTr("Description: "); font.pixelSize: Style.defaultTextSize; Layout.alignment: Qt.AlignHCenter}
         TextArea{
             id: description
             Layout.fillHeight: true
             Layout.fillWidth: true
             background: Rectangle{
                 radius: 6
-                border.color: Style.borderColor
                 border.width: 1
-                color: Style.delegateColor
             }
-            color: Style.textColor
             font.pixelSize: Style.defaultTextSize
             wrapMode: TextEdit.WordWrap
             selectByMouse: true
         }
     }
-
+    onAccepted: {
+        if(title.text.length > 0){
+            database.inserIntoTable(title.text , description.text, "nikField.text")
+            myModel.updateModel() // И обновляем модель данных с новой записью
+            title.text = ""
+            description.text = ""
+        }
+    }
+    onRejected: {
+        title.text = ""
+        description.text = ""
+    }
 }

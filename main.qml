@@ -3,6 +3,7 @@ import QtQuick.Controls 2.15
 import QtQuick.Controls 1.4 as C1
 import QtQuick.Layouts 1.15
 import StyleModule 1.0
+import QtQuick.Dialogs 1.3
 import "ui/ToolBar"
 import "ui/TasksList"
 import "ui/TaskDescription"
@@ -70,5 +71,11 @@ ApplicationWindow {
                 }
             }
         }
+    }
+    AddDialog{
+        id: dialog
+    }
+    DeleteMessage{
+        id: dialogDelete
     }
 }

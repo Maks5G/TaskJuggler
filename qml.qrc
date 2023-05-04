@@ -22,5 +22,8 @@
         <file>ui/TasksList/Tasks.qml</file>
         <file>ui/TaskDescription/Description.qml</file>
         <file>ui/assets/proccessing.png</file>
+        <file>ui/TasksList/AddDialog.qml</file>
+        <file>ui/TasksList/DeleteMessage.qml</file>
+        <file>ui/TasksList/ListDelegate.qml</file>
     </qresource>
 </RCC>

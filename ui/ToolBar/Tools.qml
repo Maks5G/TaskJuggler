@@ -1,6 +1,8 @@
 import QtQuick 2.15
 import StyleModule 1.0
 import QtQuick.Dialogs 1.3
+import QtQuick.Layouts 1.15
+import QtQuick.Controls 2.15
 import "../TaskDescription"
 
 Row{
@@ -25,20 +27,18 @@ Row{
             MouseArea{
                 anchors.fill: parent
                 onClicked: {
-                    if(index == 0){
+                    switch(index){
+                    case 0:
                         dialog.open();
+                        break;
+                    case 1:
+                        dialogDelete.open()
+                        break;
+                    default:
+                        break;
                     }
                 }
             }
         }
     }
-
-    Dialog{
-        id: dialog
-        title: "dialog"
-        width: 800
-        height: 600
-        //
-    }
-
 }
