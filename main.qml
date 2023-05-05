@@ -51,10 +51,10 @@ ApplicationWindow {
             id: tasksView
             width: parent.width/3
             Layout.minimumWidth: minimumSubAreaWidth
-            Layout.maximumWidth: parent.width / 2
+            Layout.maximumWidth: parent.width * 2 / 3
             Layout.fillWidth: true
             onWidthChanged: {
-                if(width >= parent.width / 2){
+                if(width >= parent.width * 2 / 3){
                     Layout.fillWidth = false
                     descriptionView.Layout.fillWidth = true
                 }
@@ -77,5 +77,8 @@ ApplicationWindow {
     }
     DeleteMessage{
         id: dialogDelete
+    }
+    AreYouSureDialog{
+        id: areYouSure
     }
 }

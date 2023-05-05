@@ -1,5 +1,6 @@
 pragma Singleton
 import QtQuick 2.15
+import States 1.0
 
 QtObject {
     property bool isDarkTheme: true
@@ -22,4 +23,5 @@ QtObject {
     readonly property int bigSpacing: 20
     readonly property int mediumSpacing: 10
     readonly property int tinySpacing: 4
+
 }

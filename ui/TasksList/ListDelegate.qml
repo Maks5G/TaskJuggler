@@ -2,6 +2,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 import StyleModule 1.0
+import States 1.0
 
 Component {
     id: delegate
@@ -16,7 +17,20 @@ Component {
 
         Image {
             id: icon
-            source: "qrc:/ui/assets/proccessing.png"
+            source: {
+                switch(tstate){
+                    case States.InProccess:
+                        return "qrc:/ui/assets/proccessing.png";
+                    case States.Done:
+                        return "qrc:/ui/assets/checked.png";
+                    case States.Miss:
+                        return "qrc:/ui/assets/clock.png";
+                    case States.Hold:
+                        return "qrc:/ui/assets/pause-button.png";
+                    default:
+                        break;
+                }
+            }
             height: parent.height * 0.75
             fillMode: Image.PreserveAspectFit
             anchors{
@@ -42,7 +56,7 @@ Component {
                 Text {
                     id: title
                     color: Style.textColor
-                    text: fname
+                    text: ttitle
                     font.pixelSize: Style.bigTextSize
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignLeft
@@ -58,7 +72,7 @@ Component {
             }
             Text {
                 id: description
-                text: sname
+                text: tdescription
                 Layout.fillWidth: true
                 font.pixelSize: Style.defaultTextSize
                 color: Style.text2Color
@@ -71,13 +85,14 @@ Component {
             anchors.fill: parent
             acceptedButtons: Qt.RightButton | Qt.LeftButton
             onClicked: {
-                descriptionView.title.text = fname
-                descriptionView.description.text = sname
+                descriptionView.title.text = ttitle
+                descriptionView.description.text = tdescription
                 listView.currentIndex = index
                 listView.focus = true
                 if(mouse.button == Qt.RightButton){
                     contextMenu.open();
                 }
+                console.log(tstate)
             }
         }
         Menu {
@@ -88,7 +103,7 @@ Component {
                 text: qsTr("Удалить")
                 onTriggered: {
                     /* Вызываем диалоговое окно,
-                     * которое уточнит намерение удалить строку из базы данных
+                     * которое уточнит намерение
                      * */
                     dialogDelete.open()
                 }

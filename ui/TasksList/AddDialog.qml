@@ -3,6 +3,7 @@ import QtQuick.Dialogs 1.3
 import QtQuick.Layouts 1.15
 import StyleModule 1.0
 import QtQuick.Controls 2.15
+import States 1.0
 
 
 Dialog{
@@ -59,7 +60,7 @@ Dialog{
     }
     onAccepted: {
         if(title.text.length > 0){
-            database.inserIntoTable(title.text , description.text, "nikField.text")
+            database.insertIntoTable(title.text , description.text, States.InProccess)
             myModel.updateModel() // И обновляем модель данных с новой записью
             title.text = ""
             description.text = ""

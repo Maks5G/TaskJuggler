@@ -25,5 +25,9 @@
         <file>ui/TasksList/AddDialog.qml</file>
         <file>ui/TasksList/DeleteMessage.qml</file>
         <file>ui/TasksList/ListDelegate.qml</file>
+        <file>ui/TasksList/AreYouSureDialog.qml</file>
+        <file>ui/assets/checked.png</file>
+        <file>ui/assets/pause-button.png</file>
+        <file>ui/assets/clock.png</file>
     </qresource>
 </RCC>

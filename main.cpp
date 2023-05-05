@@ -6,6 +6,7 @@
 
 #include "src/database.h"
 #include "src/listmodel.h"
+#include "src/states.h"
 
 int main(int argc, char *argv[]) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
@@ -22,6 +23,8 @@ int main(int argc, char *argv[]) {
       break;
     }
   }
+
+  qmlRegisterType<States>("States", 1, 0, "States");
 
   QQmlApplicationEngine engine;
   engine.addImportPath(":/ui");

@@ -17,7 +17,10 @@ TextField{
     font.pixelSize: Style.defaultTextSize
     selectByMouse: true
     onTextChanged: {
-        //
+        myModel.searchTask(textSearch.text);
+    }
+    onAccepted: {
+        myModel.searchTask(textSearch.text);
     }
 }
 

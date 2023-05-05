@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import StyleModule 1.0
+import States 1.0
 
 Row{
     id: filterRow
@@ -40,6 +41,28 @@ Row{
                 id: mouseArea
                 anchors.fill: parent
                 hoverEnabled: true
+                onClicked: {
+                    switch(index){
+                    case 0:
+                        myModel.where = 0
+                        break;
+                    case 1:
+                        myModel.where = States.InProccess;
+                        break;
+                    case 2:
+                        myModel.where = States.Done;
+                        break;
+                    case 3:
+                        myModel.where = States.Hold;
+                        break;
+                    case 4:
+                        myModel.where = States.Miss;
+                        break;
+                    default:
+                        break;
+                    }
+                    myModel.updateModel();
+                }
             }
         }
     }

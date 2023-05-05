@@ -12,6 +12,7 @@ SOURCES += \
 HEADERS += \
     src/database.h \
     src/listmodel.h \
+    src/states.h
 
 RESOURCES += qml.qrc
 

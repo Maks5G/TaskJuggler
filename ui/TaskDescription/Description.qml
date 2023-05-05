@@ -44,6 +44,10 @@ Rectangle{
                 color: btn.pressed ? "gray" : "white"
             }
             font.pixelSize: Style.defaultTextSize
+            onClicked: {
+                database.replaceRecord(myModel.getId(tasksView.listView.currentIndex), title.text, description.text)
+                myModel.updateModel()
+            }
         }
     }
     ColumnLayout{

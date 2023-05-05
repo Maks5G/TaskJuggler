@@ -18,7 +18,7 @@ Rectangle{
         spacing: Style.mediumSpacing
         delegate: ListDelegate{}
         onCurrentIndexChanged: {
-            console.log(currentIndex)
+//            console.log(currentIndex);
         }
     }
 

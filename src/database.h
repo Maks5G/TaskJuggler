@@ -11,13 +11,13 @@
 #include <QSqlQuery>
 
 /* Директивы имен таблицы, полей таблицы и базы данных */
-#define DATABASE_HOSTNAME "NameDataBase"
-#define DATABASE_NAME "Name.db"
+#define DATABASE_HOSTNAME "NameTaskJuggler"
+#define DATABASE_NAME "TaskJuggler.db"
 
-#define TABLE "NameTable"       // Название таблицы
-#define TABLE_FNAME "FisrtName" // Вторая колонка
-#define TABLE_SNAME "SurName"   // Третья колонка
-#define TABLE_NIK "Nik"         // Четвертая колонка
+#define TABLE "TaskJugglerTable"        // Название таблицы
+#define TABLE_TITLE "Title"             // Вторая колонка
+#define TABLE_DESCRIPTION "Description" // Третья колонка
+#define TABLE_STATE "State"             // Четвертая колонка
 
 // Первая колонка содержит Autoincrement ID
 
@@ -44,10 +44,14 @@ private:
   bool createTable(); // Создание базы таблицы в базе данных
 
 public slots:
-  bool inserIntoTable(const QVariantList &data); // Добавление записей в таблицу
-  bool inserIntoTable(const QString &fname, const QString &sname,
-                      const QString &nik);
+  bool
+  insertIntoTable(const QVariantList &data); // Добавление записей в таблицу
+  bool insertIntoTable(const QString &ttitle, const QString &tdescription,
+                       const int tstate);
   bool removeRecord(const int id); // Удаление записи из таблицы по её id
+  bool replaceRecord(const int id, const QString &ttitle,
+                     const QString &tdescription);
+  bool updateState(const int id, const int tstate);
 };
 
 #endif // DATABASE_H
