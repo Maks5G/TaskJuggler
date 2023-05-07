@@ -29,5 +29,9 @@
         <file>ui/assets/checked.png</file>
         <file>ui/assets/pause-button.png</file>
         <file>ui/assets/clock.png</file>
+        <file>ui/assets/makeInProccess.png</file>
+        <file>ui/TasksList/OrderBy.qml</file>
+        <file>ui/assets/arrow.png</file>
+        <file>ui/assets/blue-arrow.png</file>
     </qresource>
 </RCC>

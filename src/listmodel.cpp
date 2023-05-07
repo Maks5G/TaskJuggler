@@ -3,7 +3,8 @@
 #include <QString>
 
 ListModel::ListModel(QObject *parent)
-    : QSqlQueryModel(parent), m_where(""), m_orderBy(""), m_inc_desc("") {
+    : QSqlQueryModel(parent), m_where(""), m_orderBy(" ORDER BY id "),
+      m_asc_desc("") {
 
   this->updateModel();
 }
@@ -40,7 +41,7 @@ void ListModel::updateModel() {
   // Обновление производится SQL-запросом к базе данных
   this->setQuery("SELECT id, " TABLE_TITLE ", " TABLE_DESCRIPTION
                  ", " TABLE_STATE " FROM " TABLE +
-                 m_where);
+                 m_where + m_orderBy + m_asc_desc);
 }
 
 // Получение id из строки в модели представления данных
@@ -52,12 +53,13 @@ void ListModel::searchTask(const QString &ttitle) {
   if (m_where != "")
     this->setQuery("SELECT id, " TABLE_TITLE ", " TABLE_DESCRIPTION
                    ", " TABLE_STATE " FROM " TABLE +
-                   m_where + " AND " TABLE_TITLE " LIKE '" + ttitle + "%';");
+                   m_where + " AND " TABLE_TITLE " LIKE '" + ttitle + "%'" +
+                   m_orderBy + m_asc_desc);
   else
     this->setQuery("SELECT id, " TABLE_TITLE ", " TABLE_DESCRIPTION
                    ", " TABLE_STATE " FROM " TABLE " WHERE " TABLE_TITLE
                    " LIKE '" +
-                   ttitle + "%';");
+                   ttitle + "%'" + m_orderBy + m_asc_desc);
 }
 
 QString ListModel::where() const { return m_where; }
@@ -76,15 +78,15 @@ QString ListModel::orderBy() const { return m_orderBy; }
 void ListModel::setOrderBy(const QString &newOrderBy) {
   if (m_orderBy == newOrderBy)
     return;
-  m_orderBy = newOrderBy;
+  m_orderBy = " ORDER BY " + newOrderBy;
   emit orderByChanged();
 }
 
-QString ListModel::inc_desc() const { return m_inc_desc; }
+QString ListModel::asc_desc() const { return m_asc_desc; }
 
-void ListModel::setInc_desc(const QString &newInc_desc) {
-  if (m_inc_desc == newInc_desc)
+void ListModel::setAsc_desc(const QString &newAsc_desc) {
+  if (m_asc_desc == newAsc_desc)
     return;
-  m_inc_desc = newInc_desc;
-  emit inc_descChanged();
+  m_asc_desc = newAsc_desc;
+  emit asc_descChanged();
 }

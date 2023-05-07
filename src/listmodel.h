@@ -12,7 +12,7 @@ class ListModel : public QSqlQueryModel {
   Q_PROPERTY(
       QString orderBy READ orderBy WRITE setOrderBy NOTIFY orderByChanged)
   Q_PROPERTY(
-      QString inc_desc READ inc_desc WRITE setInc_desc NOTIFY inc_descChanged)
+      QString asc_desc READ asc_desc WRITE setAsc_desc NOTIFY asc_descChanged)
 
 public:
   //  QString m_where;
@@ -42,8 +42,8 @@ public:
   QString orderBy() const;
   void setOrderBy(const QString &newOrderBy);
 
-  QString inc_desc() const;
-  void setInc_desc(const QString &newInc_desc);
+  QString asc_desc() const;
+  void setAsc_desc(const QString &newAsc_desc);
 
 protected:
   /* хешированная таблица ролей для колонок.
@@ -58,7 +58,7 @@ signals:
 
   void orderByChanged();
 
-  void inc_descChanged();
+  void asc_descChanged();
 
 public slots:
   void updateModel();
@@ -68,7 +68,7 @@ public slots:
 private:
   QString m_where;
   QString m_orderBy;
-  QString m_inc_desc;
+  QString m_asc_desc;
 };
 
 #endif // LISTMODEL_H

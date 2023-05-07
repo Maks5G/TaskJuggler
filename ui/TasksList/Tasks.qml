@@ -12,13 +12,27 @@ Rectangle{
 
     ListView {
         id: listView
-        anchors.fill: parent
+        anchors{
+            top: orderBy.bottom
+            left: parent.left
+            right: parent.right
+            bottom: parent.bottom
+        }
         anchors.margins: Style.mediumOffset
         model: myModel
         spacing: Style.mediumSpacing
         delegate: ListDelegate{}
         onCurrentIndexChanged: {
 //            console.log(currentIndex);
+        }
+    }
+
+    OrderBy {
+        id: orderBy
+        anchors{
+            top: parent.top
+            left: parent.left
+            right: parent.right
         }
     }
 

@@ -92,7 +92,7 @@ Component {
                 if(mouse.button == Qt.RightButton){
                     contextMenu.open();
                 }
-                console.log(tstate)
+//                console.log(tstate)
             }
         }
         Menu {

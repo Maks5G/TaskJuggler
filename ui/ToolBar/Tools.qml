@@ -16,6 +16,7 @@ Row{
         ListElement {listId: "bin"; imgSource: "qrc:/ui/assets/bin.png";}
         ListElement {listId: "done"; imgSource: "qrc:/ui/assets/done.png";}
         ListElement {listId: "holdOn"; imgSource: "qrc:/ui/assets/stop-sign.png";}
+        ListElement {listId: "makeInProccess"; imgSource: "qrc:/ui/assets/makeInProccess.png";}
     }
 
     Repeater {
@@ -41,6 +42,10 @@ Row{
                         break;
                     case 3:
                         areYouSure._state = States.Hold
+                        areYouSure.open()
+                        break;
+                    case 4:
+                        areYouSure._state = States.InProccess
                         areYouSure.open()
                         break;
                     default:
