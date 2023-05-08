@@ -10,6 +10,12 @@ Rectangle{
     property alias btn: btn
 
     color: Style.backgroundColor
+
+    Component.onCompleted: {
+        title.text = "title"
+        description.text = "description"
+    }
+
     RowLayout{
         id: row
         anchors{
@@ -32,6 +38,17 @@ Rectangle{
             color: Style.textColor
             font.pixelSize: Style.defaultTextSize
             selectByMouse: true
+        }
+        Image{
+            id: calendarImg
+            source: "qrc:/ui/assets/schedule.png"
+            fillMode: Image.PreserveAspectFit
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    dialogCalendar.open()
+                }
+            }
         }
         Button {
             id: btn
@@ -76,6 +93,10 @@ Rectangle{
             wrapMode: TextEdit.WordWrap
             selectByMouse: true
         }
+    }
+
+    DialogCalendar{
+        id: dialogCalendar
     }
 
 }

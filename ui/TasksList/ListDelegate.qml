@@ -14,6 +14,7 @@ Component {
                mouseArea.pressed? Style.darkColor : Style.delegateColor
         radius: Style.mediumOffset
         border.color: Style.borderColor
+        focus: false
 
         Image {
             id: icon

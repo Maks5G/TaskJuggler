@@ -3,7 +3,10 @@ import QtQuick.Dialogs 1.3
 import QtQuick.Layouts 1.15
 import StyleModule 1.0
 import QtQuick.Controls 2.15
+import QtQuick.Controls.Styles 1.1
 import States 1.0
+import QtQuick.Controls 1.4 as Q1
+import "../TaskDescription"
 
 
 Dialog{
@@ -33,6 +36,17 @@ Dialog{
             selectByMouse: true
             placeholderText: qsTr("Required field")
         }
+        Image{
+            id: calendarImg
+            source: "qrc:/ui/assets/schedule.png"
+            fillMode: Image.PreserveAspectFit
+            MouseArea{
+                anchors.fill: parent
+                onClicked: {
+                    dialogCalendar.open()
+                }
+            }
+        }
     }
     ColumnLayout{
         anchors{
@@ -58,6 +72,11 @@ Dialog{
             selectByMouse: true
         }
     }
+
+    DialogCalendar {
+        id: dialogCalendar
+    }
+
     onAccepted: {
         if(title.text.length > 0){
             database.insertIntoTable(title.text , description.text, States.InProccess)

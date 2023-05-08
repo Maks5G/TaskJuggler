@@ -63,7 +63,9 @@ bool DataBase::createTable() {
                   "id INTEGER PRIMARY KEY AUTOINCREMENT, " TABLE_TITLE
                   " VARCHAR(255)    NOT NULL," TABLE_DESCRIPTION
                   " VARCHAR(255)    NOT NULL," TABLE_STATE
-                  " INTEGER    NOT NULL"
+                  " INTEGER    NOT NULL," /*TABLE_START
+                  " VARCHAR(255)    NOT NULL," TABLE_END
+                  " VARCHAR(255)    NOT NULL"*/
                   " )")) {
     qDebug() << "DataBase: error of create " << TABLE;
     qDebug() << query.lastError().text();

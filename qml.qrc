@@ -33,5 +33,7 @@
         <file>ui/TasksList/OrderBy.qml</file>
         <file>ui/assets/arrow.png</file>
         <file>ui/assets/blue-arrow.png</file>
+        <file>ui/assets/schedule.png</file>
+        <file>ui/TaskDescription/DialogCalendar.qml</file>
     </qresource>
 </RCC>

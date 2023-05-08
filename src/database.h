@@ -18,6 +18,8 @@
 #define TABLE_TITLE "Title"             // Вторая колонка
 #define TABLE_DESCRIPTION "Description" // Третья колонка
 #define TABLE_STATE "State"             // Четвертая колонка
+#define TABLE_START "StartDateTime"
+#define TABLE_END "EndDate"
 
 // Первая колонка содержит Autoincrement ID
 
