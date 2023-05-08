@@ -79,7 +79,14 @@ Dialog{
 
     onAccepted: {
         if(title.text.length > 0){
-            database.insertIntoTable(title.text , description.text, States.InProccess)
+            var date = new Date();
+            if(dialogCalendar.endDate){
+                database.insertIntoTable(title.text , description.text, States.InProccess, date.toLocaleString(Qt.locale(), Locale.ShortFormat),
+                                         dialogCalendar.endDate)
+            } else {
+                database.insertIntoTable(title.text , description.text, States.InProccess, date.toLocaleString(Qt.locale(), Locale.ShortFormat),
+                                         "limitless")
+            }
             myModel.updateModel() // И обновляем модель данных с новой записью
             title.text = ""
             description.text = ""

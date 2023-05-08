@@ -33,15 +33,15 @@ QHash<int, QByteArray> ListModel::roleNames() const {
   roles[TitleRole] = "ttitle";
   roles[DescriptionRole] = "tdescription";
   roles[StateRole] = "tstate";
+  roles[StartRole] = "tstart";
+  roles[EndRole] = "tend";
   return roles;
 }
 
 // Метод обновления таблицы в модели представления данных
 void ListModel::updateModel() {
   // Обновление производится SQL-запросом к базе данных
-  this->setQuery("SELECT id, " TABLE_TITLE ", " TABLE_DESCRIPTION
-                 ", " TABLE_STATE " FROM " TABLE +
-                 m_where + m_orderBy + m_asc_desc);
+  this->setQuery("SELECT * FROM " TABLE + m_where + m_orderBy + m_asc_desc);
 }
 
 // Получение id из строки в модели представления данных
@@ -51,14 +51,11 @@ int ListModel::getId(int row) {
 
 void ListModel::searchTask(const QString &ttitle) {
   if (m_where != "")
-    this->setQuery("SELECT id, " TABLE_TITLE ", " TABLE_DESCRIPTION
-                   ", " TABLE_STATE " FROM " TABLE +
-                   m_where + " AND " TABLE_TITLE " LIKE '" + ttitle + "%'" +
-                   m_orderBy + m_asc_desc);
+    this->setQuery("SELECT * FROM " TABLE + m_where +
+                   " AND " TABLE_TITLE " LIKE '" + ttitle + "%'" + m_orderBy +
+                   m_asc_desc);
   else
-    this->setQuery("SELECT id, " TABLE_TITLE ", " TABLE_DESCRIPTION
-                   ", " TABLE_STATE " FROM " TABLE " WHERE " TABLE_TITLE
-                   " LIKE '" +
+    this->setQuery("SELECT * FROM " TABLE " WHERE " TABLE_TITLE " LIKE '" +
                    ttitle + "%'" + m_orderBy + m_asc_desc);
 }
 

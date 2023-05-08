@@ -63,9 +63,9 @@ bool DataBase::createTable() {
                   "id INTEGER PRIMARY KEY AUTOINCREMENT, " TABLE_TITLE
                   " VARCHAR(255)    NOT NULL," TABLE_DESCRIPTION
                   " VARCHAR(255)    NOT NULL," TABLE_STATE
-                  " INTEGER    NOT NULL," /*TABLE_START
+                  " INTEGER    NOT NULL," TABLE_START
                   " VARCHAR(255)    NOT NULL," TABLE_END
-                  " VARCHAR(255)    NOT NULL"*/
+                  " VARCHAR(255)    NOT NULL"
                   " )")) {
     qDebug() << "DataBase: error of create " << TABLE;
     qDebug() << query.lastError().text();
@@ -88,11 +88,13 @@ bool DataBase::insertIntoTable(const QVariantList &data) {
    * для подстановки данных из QVariantList
    * */
   query.prepare("INSERT INTO " TABLE " ( " TABLE_TITLE ", " TABLE_DESCRIPTION
-                ", " TABLE_STATE " ) "
-                "VALUES (:Title, :Description, :State)");
+                ", " TABLE_STATE ", " TABLE_START ", " TABLE_END " ) "
+                "VALUES (:Title, :Description, :State, :Start, :End)");
   query.bindValue(":Title", data[0].toString());
   query.bindValue(":Description", data[1].toString());
   query.bindValue(":State", data[2].toString());
+  query.bindValue(":Start", data[3].toString());
+  query.bindValue(":End", data[4].toString());
 
   // После чего выполняется запросом методом exec()
   if (!query.exec()) {
@@ -108,11 +110,14 @@ bool DataBase::insertIntoTable(const QVariantList &data) {
 /* Второй метод для вставки записи в базу данных
  * */
 bool DataBase::insertIntoTable(const QString &ttitle,
-                               const QString &tdescription, const int tstate) {
+                               const QString &tdescription, const int tstate,
+                               const QString &tstart, const QString &tend) {
   QVariantList data;
   data.append(ttitle);
   data.append(tdescription);
   data.append(tstate);
+  data.append(tstart);
+  data.append(tend);
 
   if (insertIntoTable(data))
     return true;
@@ -143,15 +148,17 @@ bool DataBase::removeRecord(const int id) {
 }
 
 bool DataBase::replaceRecord(const int id, const QString &ttitle,
-                             const QString &tdescription) {
+                             const QString &tdescription, const QString &tend) {
   QSqlQuery query;
 
   query.prepare("UPDATE " TABLE " SET " TABLE_TITLE
-                " = :Title, " TABLE_DESCRIPTION " = :Description"
+                " = :Title, " TABLE_DESCRIPTION " = :Description, " TABLE_END
+                " = :End"
                 " WHERE id= :ID ;");
   query.bindValue(":Title", ttitle);
   query.bindValue(":Description", tdescription);
   query.bindValue(":ID", id);
+  query.bindValue(":End", tend);
 
   if (!query.exec()) {
     qDebug() << "error replace row " << TABLE;

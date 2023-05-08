@@ -62,7 +62,7 @@ Rectangle{
             }
             font.pixelSize: Style.defaultTextSize
             onClicked: {
-                database.replaceRecord(myModel.getId(tasksView.listView.currentIndex), title.text, description.text)
+                database.replaceRecord(myModel.getId(tasksView.listView.currentIndex), title.text, description.text, dialogCalendar.endDate)
                 myModel.updateModel()
             }
         }

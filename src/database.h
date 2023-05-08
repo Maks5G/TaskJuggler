@@ -12,9 +12,9 @@
 
 /* Директивы имен таблицы, полей таблицы и базы данных */
 #define DATABASE_HOSTNAME "NameTaskJuggler"
-#define DATABASE_NAME "TaskJuggler.db"
+#define DATABASE_NAME "TaskJuggler3.db"
 
-#define TABLE "TaskJugglerTable"        // Название таблицы
+#define TABLE "TaskJugglerTable3"       // Название таблицы
 #define TABLE_TITLE "Title"             // Вторая колонка
 #define TABLE_DESCRIPTION "Description" // Третья колонка
 #define TABLE_STATE "State"             // Четвертая колонка
@@ -49,10 +49,11 @@ public slots:
   bool
   insertIntoTable(const QVariantList &data); // Добавление записей в таблицу
   bool insertIntoTable(const QString &ttitle, const QString &tdescription,
-                       const int tstate);
+                       const int tstate, const QString &tstart,
+                       const QString &tend);
   bool removeRecord(const int id); // Удаление записи из таблицы по её id
   bool replaceRecord(const int id, const QString &ttitle,
-                     const QString &tdescription);
+                     const QString &tdescription, const QString &tend);
   bool updateState(const int id, const int tstate);
 };
 

@@ -27,7 +27,9 @@ public:
     IdRole = Qt::UserRole + 1, // id
     TitleRole,                 // title
     DescriptionRole,           // description
-    StateRole                  // state
+    StateRole,                 // state
+    StartRole,                 // start
+    EndRole                    // end
   };
 
   // объявляем конструктор класса

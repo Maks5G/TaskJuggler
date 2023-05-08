@@ -6,6 +6,7 @@ import StyleModule 1.0
 
 Rectangle{
     property alias listView: listView
+//    property alias dateTimeText: delegate.dateTimeText
 
     id: tasksView
     color: Style.backgroundColor
@@ -21,7 +22,7 @@ Rectangle{
         anchors.margins: Style.mediumOffset
         model: myModel
         spacing: Style.mediumSpacing
-        delegate: ListDelegate{}
+        delegate: ListDelegate{/* id: delegate*/}
         onCurrentIndexChanged: {
 //            console.log(currentIndex);
         }

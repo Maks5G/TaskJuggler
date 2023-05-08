@@ -9,7 +9,7 @@ import "ui/TasksList"
 import "ui/TaskDescription"
 
 ApplicationWindow {
-    property int minimumSubAreaWidth: 200
+    property int minimumSubAreaWidth: 300
 
     id: mainWindow
     width: 1280

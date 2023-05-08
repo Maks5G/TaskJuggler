@@ -5,6 +5,7 @@ import StyleModule 1.0
 import States 1.0
 
 Component {
+//    property alias dateTimeText: dateTimeText.text
     id: delegate
     Rectangle {
         id: rect
@@ -53,7 +54,6 @@ Component {
             }
             RowLayout {
                 id: row
-                Layout.minimumWidth: parent.width
                 Text {
                     id: title
                     color: Style.textColor
@@ -64,21 +64,32 @@ Component {
                     elide: Text.ElideRight
                 }
                 Text {
-                    id: dateTime
-                    text: "21:06"
+                    id: dateTimeText
+                    text: tstart
                     font.pixelSize: Style.defaultTextSize
                     color: Style.textColor
                     RowLayout.alignment: Qt.AlignRight
                 }
             }
-            Text {
-                id: description
-                text: tdescription
-                Layout.fillWidth: true
-                font.pixelSize: Style.defaultTextSize
-                color: Style.text2Color
-                Layout.alignment: Qt.AlignBottom
-                elide: Text.ElideRight
+            RowLayout{
+                id: row2
+                Text {
+                    id: description
+                    text: tdescription
+                    Layout.fillWidth: true
+                    font.pixelSize: Style.defaultTextSize
+                    color: Style.text2Color
+                    Layout.alignment: Qt.AlignBottom
+                    elide: Text.ElideRight
+                }
+                Text {
+                    id: dateText
+                    text: tend
+                    font.pixelSize: Style.tinyTextSize
+                    color: Style.text2Color
+                    RowLayout.alignment: Qt.AlignRight | Qt.AlignBottom
+
+                }
             }
         }
         MouseArea {
@@ -93,7 +104,7 @@ Component {
                 if(mouse.button == Qt.RightButton){
                     contextMenu.open();
                 }
-//                console.log(tstate)
+//                console.log(tstart)
             }
         }
         Menu {

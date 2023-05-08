@@ -13,6 +13,7 @@ QtObject {
     property color borderColor: isDarkTheme ? "white" : "black"
     property color delegateColor: isDarkTheme ? "#424242" : "#EEEEEE"
 
+    readonly property int tinyTextSize: 17
     readonly property int defaultTextSize: 20
     readonly property int bigTextSize: 25
 

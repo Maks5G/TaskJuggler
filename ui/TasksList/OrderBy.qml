@@ -31,7 +31,8 @@ Rectangle {
             ListElement{listID: "title"; listText: qsTr("Title")}
             ListElement{listID: "description"; listText: qsTr("Description")}
             ListElement{listID: "state"; listText: qsTr("State")}
-            ListElement{listID: "time"; listText: qsTr("Time")}
+            ListElement{listID: "start"; listText: qsTr("Start")}
+            ListElement{listID: "end"; listText: qsTr("End")}
         }
 
         Repeater {
@@ -39,7 +40,7 @@ Rectangle {
             Rectangle {
                 id: listID
                 height: orderBy.height
-                width: parent.width / 5 - orderRow.spacing
+                width: parent.width / 6 - orderRow.spacing
                 radius: 10
                 scale: 0.9
                 color: mouseArea.containsPress ? Style.darkColor : mouseArea.containsMouse ? Style.primaryColor : Style.lightColor
@@ -73,9 +74,12 @@ Rectangle {
                         case 3:
                             myModel.orderBy = "State";
                             break;
-//                            case 4:
-//                                myModel.orderBy = "Time";
-//                                break;
+                        case 4:
+                            myModel.orderBy = "StartDateTime";
+                            break;
+                        case 5:
+                            myModel.orderBy = "EndDate";
+                            break;
                         default:
                             break;
                         }
