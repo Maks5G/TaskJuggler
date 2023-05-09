@@ -97,7 +97,6 @@ Rectangle {
             top: parent.top
             bottom: parent.bottom
             right: parent.right
-//            margins: Style.mediumOffset
         }
         width: 26
 

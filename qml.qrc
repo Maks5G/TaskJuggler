@@ -35,5 +35,7 @@
         <file>ui/assets/blue-arrow.png</file>
         <file>ui/assets/schedule.png</file>
         <file>ui/TaskDescription/DialogCalendar.qml</file>
+        <file>src/timer.h</file>
+        <file>src/timer.cpp</file>
     </qresource>
 </RCC>

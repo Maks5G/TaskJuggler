@@ -7,12 +7,14 @@ QT += qml quick widgets sql
 SOURCES += \
         main.cpp \
         src/database.cpp \
-        src/listmodel.cpp
+        src/listmodel.cpp \
+        src/timer.cpp
 
 HEADERS += \
     src/database.h \
     src/listmodel.h \
-    src/states.h
+    src/states.h \
+    src/timer.h
 
 RESOURCES += qml.qrc
 

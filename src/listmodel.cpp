@@ -49,6 +49,14 @@ int ListModel::getId(int row) {
   return this->data(this->index(row, 0), IdRole).toInt();
 }
 
+int ListModel::getState(int row) {
+  return this->data(this->index(row, 0), StateRole).toInt();
+}
+
+QString ListModel::getEnd(int row) {
+  return this->data(this->index(row, 0), EndRole).toString();
+}
+
 void ListModel::searchTask(const QString &ttitle) {
   if (m_where != "")
     this->setQuery("SELECT * FROM " TABLE + m_where +

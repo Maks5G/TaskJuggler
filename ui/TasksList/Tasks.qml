@@ -1,12 +1,9 @@
 import QtQuick 2.15
-//import QtQuick.Layouts 1.15
-//import QtQuick.Controls 2.15
 import StyleModule 1.0
-
+import Timer 1.0
 
 Rectangle{
     property alias listView: listView
-//    property alias dateTimeText: delegate.dateTimeText
 
     id: tasksView
     color: Style.backgroundColor
@@ -25,6 +22,15 @@ Rectangle{
         delegate: ListDelegate{/* id: delegate*/}
         onCurrentIndexChanged: {
 //            console.log(currentIndex);
+
+        }
+    }
+
+    MyTimer {
+        id: myTimer
+        Component.onCompleted: {
+            myTimer.start(myModel, database);
+            myTimer.compareDate();
         }
     }
 

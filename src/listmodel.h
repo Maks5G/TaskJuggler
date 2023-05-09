@@ -15,10 +15,6 @@ class ListModel : public QSqlQueryModel {
       QString asc_desc READ asc_desc WRITE setAsc_desc NOTIFY asc_descChanged)
 
 public:
-  //  QString m_where;
-  //  QString m_orderBy;
-  //  QString m_inc_desc;
-
   /* Перечисляем все роли, которые будут использоваться в TableView
    * Как видите, они должны лежать в памяти выше параметра Qt::UserRole
    * Связано с тем, что информация ниже этого адреса не для кастомизаций
@@ -65,6 +61,8 @@ signals:
 public slots:
   void updateModel();
   int getId(int row);
+  int getState(int row);
+  QString getEnd(int row);
   void searchTask(const QString &ttitle);
 
 private:

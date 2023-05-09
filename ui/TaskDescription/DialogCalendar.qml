@@ -21,7 +21,7 @@ Dialog{
         }
     }
     onAccepted: {
-        endDate = calendar.selectedDate.toLocaleDateString(Qt.locale(), "dd:MM:yyyy")
+        endDate = calendar.selectedDate.toLocaleDateString(Qt.locale(), "dd.MM.yyyy")
     }
     onRejected: {
         endDate = ""

@@ -85,7 +85,7 @@ Dialog{
                                          dialogCalendar.endDate)
             } else {
                 database.insertIntoTable(title.text , description.text, States.InProccess, date.toLocaleString(Qt.locale(), Locale.ShortFormat),
-                                         "limitless")
+                                         date.toLocaleString(Qt.locale(), Locale.ShortFormat))
             }
             myModel.updateModel() // И обновляем модель данных с новой записью
             title.text = ""
