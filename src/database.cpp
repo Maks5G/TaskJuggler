@@ -4,12 +4,12 @@ DataBase::DataBase(QObject *parent) : QObject(parent) {}
 
 DataBase::~DataBase() {}
 
-/* Методы для подключения к базе данных
+/* Методи для підключення до бази даних
  * */
 void DataBase::connectToDataBase() {
-  /* Перед подключением к базе данных производим проверку на её существование.
-   * В зависимости от результата производим открытие базы данных или её
-   * восстановление
+  /* Перед підключенням до бази даних проводимо перевірку на її існування.
+   * Залежно від результату робимо відкриття бази даних або її
+   * відновлення
    * */
   if (!QFile("C:/example/" DATABASE_NAME).exists()) {
     this->restoreDataBase();
@@ -18,25 +18,25 @@ void DataBase::connectToDataBase() {
   }
 }
 
-/* Методы восстановления базы данных
+/* Методи відновлення бази даних
  * */
 bool DataBase::restoreDataBase() {
-  // Если база данных открылась ...
+  // Якщо база даних відкрилась ...
   if (this->openDataBase()) {
-    // Производим восстановление базы данных
+    // Проводимо відновлення бази даних
     return (this->createTable()) ? true : false;
   } else {
-    qDebug() << "Не удалось восстановить базу данных";
+    qDebug() << "Не вдалося відновити базу даних";
     return false;
   }
   return false;
 }
 
-/* Метод для открытия базы данных
+/* Метод для відкриття бази даних
  * */
 bool DataBase::openDataBase() {
-  /* База данных открывается по заданному пути
-   * и имени базы данных, если она существует
+  /* База даних відкривається за заданим шляхом
+   * і імені бази даних, якщо вона існує
    * */
   db = QSqlDatabase::addDatabase("QSQLITE");
   db.setHostName(DATABASE_HOSTNAME);
@@ -48,15 +48,15 @@ bool DataBase::openDataBase() {
   }
 }
 
-/* Методы закрытия базы данных
+/* Методи закриття бази даних
  * */
 void DataBase::closeDataBase() { db.close(); }
 
-/* Метод для создания таблицы в базе данных
+/* Метод для створення таблиці в базі даних
  * */
 bool DataBase::createTable() {
-  /* В данном случае используется формирование сырого SQL-запроса
-   * с последующим его выполнением.
+  /* В даному випадку використовується формування сирого SQL-запросу
+   * з наступним його виконанням.
    * */
   QSqlQuery query;
   if (!query.exec("CREATE TABLE " TABLE " ("
@@ -76,16 +76,16 @@ bool DataBase::createTable() {
   return false;
 }
 
-/* Метод для вставки записи в базу данных
+/* Метод вставки запису в базу даних
  * */
 bool DataBase::insertIntoTable(const QVariantList &data) {
-  /* Запрос SQL формируется из QVariantList,
-   * в который передаются данные для вставки в таблицу.
+  /* Запрос SQL формується із QVariantList,
+   * в який передаються дані для вставки в таблицю.
    * */
   QSqlQuery query;
-  /* В начале SQL запрос формируется с ключами,
-   * которые потом связываются методом bindValue
-   * для подстановки данных из QVariantList
+  /* На початку SQL запрос формирується з ключами,
+   * які потім звязуються методом bindValue
+   * для підстановки даних із QVariantList
    * */
   query.prepare("INSERT INTO " TABLE " ( " TABLE_TITLE ", " TABLE_DESCRIPTION
                 ", " TABLE_STATE ", " TABLE_START ", " TABLE_END " ) "
@@ -107,7 +107,7 @@ bool DataBase::insertIntoTable(const QVariantList &data) {
   return false;
 }
 
-/* Второй метод для вставки записи в базу данных
+/* Другий метод для вставки запису в базу даних
  * */
 bool DataBase::insertIntoTable(const QString &ttitle,
                                const QString &tdescription, const int tstate,
@@ -125,18 +125,18 @@ bool DataBase::insertIntoTable(const QString &ttitle,
     return false;
 }
 
-/* Метод для удаления записи из таблицы
+/* Метод для видалення запису із таблиці
  * */
 bool DataBase::removeRecord(const int id) {
-  // Удаление строки из базы данных будет производитсья с помощью SQL-запроса
+  // Видалення рядків з бази даних буде здійснюватися за допомогою SQL-запиту
   QSqlQuery query;
 
   // Удаление производим по id записи, который передается в качестве аргумента
-  // функции
+  // функції
   query.prepare("DELETE FROM " TABLE " WHERE id= :ID ;");
   query.bindValue(":ID", id);
 
-  // Выполняем удаление
+  // Виконуємо видалення
   if (!query.exec()) {
     qDebug() << "error delete row " << TABLE;
     qDebug() << query.lastError().text();
@@ -151,6 +151,7 @@ bool DataBase::replaceRecord(const int id, const QString &ttitle,
                              const QString &tdescription, const QString &tend) {
   QSqlQuery query;
 
+  // аналогічний принцип до минулого, лише більше полів
   query.prepare("UPDATE " TABLE " SET " TABLE_TITLE
                 " = :Title, " TABLE_DESCRIPTION " = :Description, " TABLE_END
                 " = :End"
@@ -173,14 +174,13 @@ bool DataBase::replaceRecord(const int id, const QString &ttitle,
 bool DataBase::updateState(const int id, const int tstate) {
   QSqlQuery query;
 
-  // Удаление производим по id записи, который передается в качестве аргумента
-  // функции
+  // Обновляємо стан за id
   query.prepare("UPDATE " TABLE " SET " TABLE_STATE
                 " = :State WHERE id = :ID ;");
   query.bindValue(":State", tstate);
   query.bindValue(":ID", id);
 
-  // Выполняем удаление
+  // Виконуємо запрос
   if (!query.exec()) {
     qDebug() << "error update state " << TABLE;
     qDebug() << query.lastError().text();

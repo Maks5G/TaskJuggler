@@ -24,7 +24,7 @@ Dialog{
             margins: Style.mediumOffset
         }
 
-        Text { text: qsTr("Title: "); font.pixelSize: Style.defaultTextSize;}
+        Text { text: qsTr("Title: ") + mytrans.emptyString; font.pixelSize: Style.defaultTextSize;}
         TextField {
             id: title
             Layout.fillWidth: true
@@ -34,7 +34,7 @@ Dialog{
             }
             font.pixelSize: Style.defaultTextSize
             selectByMouse: true
-            placeholderText: qsTr("Required field")
+            placeholderText: qsTr("Required field") + mytrans.emptyString
         }
         Image{
             id: calendarImg
@@ -58,7 +58,7 @@ Dialog{
         }
 
         id: column
-        Text { text: qsTr("Description: "); font.pixelSize: Style.defaultTextSize; Layout.alignment: Qt.AlignHCenter}
+        Text { text: qsTr("Description: ") + mytrans.emptyString; font.pixelSize: Style.defaultTextSize; Layout.alignment: Qt.AlignHCenter}
         TextArea{
             id: description
             Layout.fillHeight: true
@@ -80,14 +80,14 @@ Dialog{
     onAccepted: {
         if(title.text.length > 0){
             var date = new Date();
-            if(dialogCalendar.endDate){
+            if(dialogCalendar.endDate){ // вставляємо в базу даних новий запис
                 database.insertIntoTable(title.text , description.text, States.InProccess, date.toLocaleString(Qt.locale(), Locale.ShortFormat),
                                          dialogCalendar.endDate)
             } else {
                 database.insertIntoTable(title.text , description.text, States.InProccess, date.toLocaleString(Qt.locale(), Locale.ShortFormat),
                                          date.toLocaleString(Qt.locale(), Locale.ShortFormat))
             }
-            myModel.updateModel() // И обновляем модель данных с новой записью
+            myModel.updateModel() // І оновлюємо модель даних з новим записом
             title.text = ""
             description.text = ""
         }

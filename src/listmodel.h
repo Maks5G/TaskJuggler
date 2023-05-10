@@ -8,30 +8,32 @@
 class ListModel : public QSqlQueryModel {
   Q_OBJECT
 
-  Q_PROPERTY(QString where READ where WRITE setWhere NOTIFY whereChanged)
+  Q_PROPERTY(QString where READ where WRITE setWhere NOTIFY
+                 whereChanged) // для умови виборки даних через WHERE
+  Q_PROPERTY(QString orderBy READ orderBy WRITE setOrderBy NOTIFY
+                 orderByChanged) // для сортування через ORDER_BY
   Q_PROPERTY(
-      QString orderBy READ orderBy WRITE setOrderBy NOTIFY orderByChanged)
-  Q_PROPERTY(
-      QString asc_desc READ asc_desc WRITE setAsc_desc NOTIFY asc_descChanged)
+      QString asc_desc READ asc_desc WRITE setAsc_desc NOTIFY
+          asc_descChanged) // ASC DESC для прямого сортування чи оберненого
 
 public:
-  /* Перечисляем все роли, которые будут использоваться в TableView
-   * Как видите, они должны лежать в памяти выше параметра Qt::UserRole
-   * Связано с тем, что информация ниже этого адреса не для кастомизаций
+  /* Перераховуємо всі ролі, які будуть використовуватися в TableView
+   * Вони повинні знаходитися в пам'яті вище параметра Qt::UserRole
+   * Пов'язано з тим, що інформація нижче цієї адреси не для кастомізацій
    * */
   enum Roles {
     IdRole = Qt::UserRole + 1, // id
-    TitleRole,                 // title
-    DescriptionRole,           // description
-    StateRole,                 // state
-    StartRole,                 // start
-    EndRole                    // end
+    TitleRole,                 // заголовок
+    DescriptionRole,           // опис
+    StateRole,                 // стан
+    StartRole,                 // початкова дата
+    EndRole                    // кінцева дата
   };
 
-  // объявляем конструктор класса
+  // Оголошуємо конструктор класу
   explicit ListModel(QObject *parent = 0);
 
-  // Переопределяем метод, который будет возвращать данные
+  // Перевизначаємо метод, який буде повертати дані
   QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const;
 
   QString where() const;
@@ -44,9 +46,9 @@ public:
   void setAsc_desc(const QString &newAsc_desc);
 
 protected:
-  /* хешированная таблица ролей для колонок.
-   * Метод используется в дебрях базового класса QAbstractItemModel,
-   * от которого наследован класс QSqlQueryModel
+  /* хешована таблиця ролей для колонок.
+   * Метод використовується в нетрях базового класу QAbstractItemModel,
+   * від якого успадковано клас QSqlQueryModel
    * */
   QHash<int, QByteArray> roleNames() const;
 
@@ -59,11 +61,12 @@ signals:
   void asc_descChanged();
 
 public slots:
-  void updateModel();
-  int getId(int row);
-  int getState(int row);
-  QString getEnd(int row);
-  void searchTask(const QString &ttitle);
+  void updateModel(); // "вивід" бази даних із зазначенимим параметрами
+  int getId(int row); // отримування id через індекс моделі
+  int getState(int row); // отримування стану через індекс моделі
+  QString getEnd(int row); // отримування кінцевої дати через індекс моделі
+  void searchTask(const QString &ttitle); // "вивід" бази даних із зазначенимим
+                                          // параметрами за заголовком
 
 private:
   QString m_where;

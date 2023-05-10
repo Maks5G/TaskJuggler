@@ -1,5 +1,6 @@
 import QtQuick 2.15
 import StyleModule 1.0
+import MyLang 1.0
 
 Row {
     id: languages
@@ -10,6 +11,12 @@ Row {
         source: "qrc:/ui/assets/uk.png"
         fillMode: Image.PreserveAspectFit
         height: parent.height
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                mytrans.updateLanguage(MyLang.ENG)
+            }
+        }
     }
 
     Image {
@@ -17,6 +24,11 @@ Row {
         source: "qrc:/ui/assets/ukraine.png"
         fillMode: Image.PreserveAspectFit
         height: parent.height
+        MouseArea{
+            anchors.fill: parent
+            onClicked: {
+                mytrans.updateLanguage(MyLang.UKR)
+            }
+        }
     }
-
 }

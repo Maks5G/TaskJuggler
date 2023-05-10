@@ -12,7 +12,7 @@ Dialog{
     width: 480
     height: 640
 
-    property string endDate: ""
+    property string endDate: "" // обрана кінцева дата
 
     contentItem: Rectangle {
         Q1.Calendar{

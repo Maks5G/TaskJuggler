@@ -5,7 +5,6 @@ import StyleModule 1.0
 import States 1.0
 
 Component {
-//    property alias dateTimeText: dateTimeText.text
     id: delegate
     Rectangle {
         id: rect
@@ -61,7 +60,7 @@ Component {
                     font.pixelSize: Style.bigTextSize
                     Layout.fillWidth: true
                     Layout.alignment: Qt.AlignLeft
-                    elide: Text.ElideRight
+                    elide: Text.ElideRight // якщо текст не поміщається, то він частково чи повністю замінється 3 крапками
                 }
                 Text {
                     id: dateTimeText
@@ -80,7 +79,7 @@ Component {
                     font.pixelSize: Style.defaultTextSize
                     color: Style.text2Color
                     Layout.alignment: Qt.AlignBottom
-                    elide: Text.ElideRight
+                    elide: Text.ElideRight // якщо текст не поміщається, то він частково чи повністю замінється 3 крапками
                 }
                 Text {
                     id: dateText
@@ -104,7 +103,6 @@ Component {
                 if(mouse.button == Qt.RightButton){
                     contextMenu.open();
                 }
-//                console.log(tstart)
             }
         }
         Menu {
@@ -112,11 +110,11 @@ Component {
             anchors.centerIn: parent
 
             MenuItem {
-                text: qsTr("Удалить")
+                text: qsTr("Delete") + mytrans.emptyString
                 onTriggered: {
-                    /* Вызываем диалоговое окно,
-                     * которое уточнит намерение
-                     * */
+                    /* Викликаємо діалогове вікно,
+                      * яке уточнить намір
+                      * */
                     dialogDelete.open()
                 }
             }

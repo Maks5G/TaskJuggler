@@ -9,17 +9,16 @@ Row{
 
     ListModel{
         id: model
-        ListElement{listID: "all"; listText: qsTr("All")}
-        ListElement{listID: "proccess"; listText: qsTr("In proccess")}
-        ListElement{listID: "done"; listText: qsTr("Done")}
-        ListElement{listID: "hold"; listText: qsTr("Hold")}
-        ListElement{listID: "miss"; listText: qsTr("Miss")}
+        ListElement{listText: qsTr("All")}
+        ListElement{listText: qsTr("In proccess")}
+        ListElement{listText: qsTr("Done")}
+        ListElement{listText: qsTr("Hold")}
+        ListElement{listText: qsTr("Miss")}
     }
 
     Repeater {
         model: model
         Rectangle{
-            id: listID
             height: root.height
             width: parent.width / 5 - filterRow.spacing
             radius: 10
@@ -30,10 +29,10 @@ Row{
             Text{
                 width: parent.width
                 anchors.centerIn: parent
-                text: listText
+                text: listText  + mytrans.emptyString
                 horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: Style.defaultTextSize
-                elide: Text.ElideMiddle
+                elide: Text.ElideMiddle // якщо текст не поміщається, то він частково чи повністю замінється 3 крапками
                 color: Style.textColor
             }
 

@@ -3,6 +3,7 @@ import QtQuick.Layouts 1.15
 import QtQuick.Controls 2.15
 import StyleModule 1.0
 
+// права частина програми із описом
 Rectangle{
     id: descriptionView
     property alias title: title
@@ -25,10 +26,10 @@ Rectangle{
             margins: Style.mediumOffset
         }
 
-        Text { text: qsTr("Title: "); color: Style.textColor; font.pixelSize: Style.defaultTextSize;}
+        Text { text: qsTr("Title: ") + mytrans.emptyString; color: Style.textColor; font.pixelSize: Style.defaultTextSize;}
         TextField {
             id: title
-            Layout.fillWidth: true
+            Layout.fillWidth: true // для заповнення всієї можливої ширини ряду
             background: Rectangle{
                 radius: 6
                 border.color: Style.borderColor
@@ -37,7 +38,7 @@ Rectangle{
             }
             color: Style.textColor
             font.pixelSize: Style.defaultTextSize
-            selectByMouse: true
+            selectByMouse: true // щоб можна було виділити мишею текст
         }
         Image{
             id: calendarImg
@@ -53,7 +54,7 @@ Rectangle{
         Button {
             id: btn
             Layout.alignment: Qt.AlignVCenter
-            text: qsTr("Submit")
+            text: qsTr("Submit") + mytrans.emptyString
             background: Rectangle{
                 radius: 6
                 border.color: Style.borderColor
@@ -61,8 +62,13 @@ Rectangle{
                 color: btn.pressed ? "gray" : "white"
             }
             font.pixelSize: Style.defaultTextSize
-            onClicked: {
-                database.replaceRecord(myModel.getId(tasksView.listView.currentIndex), title.text, description.text, dialogCalendar.endDate)
+            onClicked: { // замінюємо запис і обновляємо модель
+                if(dialogCalendar.endDate){
+                    database.replaceRecord(myModel.getId(tasksView.listView.currentIndex), title.text, description.text, dialogCalendar.endDate)
+                } else{
+                    database.replaceRecord(myModel.getId(tasksView.listView.currentIndex), title.text, description.text,
+                                           myModel.getEnd(tasksView.listView.currentIndex))
+                }
                 myModel.updateModel()
             }
         }
@@ -77,7 +83,7 @@ Rectangle{
         }
 
         id: column
-        Text { text: qsTr("Description: "); color: Style.textColor; font.pixelSize: Style.defaultTextSize; Layout.alignment: Qt.AlignHCenter}
+        Text { text: qsTr("Description: ") + mytrans.emptyString; color: Style.textColor; font.pixelSize: Style.defaultTextSize; Layout.alignment: Qt.AlignHCenter}
         TextArea{
             id: description
             Layout.fillHeight: true
@@ -90,8 +96,8 @@ Rectangle{
             }
             color: Style.textColor
             font.pixelSize: Style.defaultTextSize
-            wrapMode: TextEdit.WordWrap
-            selectByMouse: true
+            wrapMode: TextEdit.WordWrap // для перенесення слів
+            selectByMouse: true // щоб можна було виділити текст мишою
         }
     }
 

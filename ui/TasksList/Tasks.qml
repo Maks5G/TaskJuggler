@@ -19,18 +19,13 @@ Rectangle{
         anchors.margins: Style.mediumOffset
         model: myModel
         spacing: Style.mediumSpacing
-        delegate: ListDelegate{/* id: delegate*/}
-        onCurrentIndexChanged: {
-//            console.log(currentIndex);
-
-        }
+        delegate: ListDelegate{}
     }
 
     MyTimer {
         id: myTimer
-        Component.onCompleted: {
+        Component.onCompleted: { // конструктор, в якому стартуємо таймер із вбудованою перевіркою
             myTimer.start(myModel, database);
-            myTimer.compareDate();
         }
     }
 
@@ -42,5 +37,4 @@ Rectangle{
             right: parent.right
         }
     }
-
 }

@@ -1,4 +1,5 @@
 #include <QGuiApplication>
+#include <QIcon>
 #include <QLocale>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -8,23 +9,20 @@
 #include "src/listmodel.h"
 #include "src/states.h"
 #include "src/timer.h"
+#include "src/translation/mylang.h"
+#include "src/translation/mytranslator.h"
 
 int main(int argc, char *argv[]) {
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
   QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 #endif
   QGuiApplication app(argc, argv);
+  app.setWindowIcon(QIcon(":/ui/assets/TaskJuggler.png"));
 
-  QTranslator translator;
-  const QStringList uiLanguages = QLocale::system().uiLanguages();
-  for (const QString &locale : uiLanguages) {
-    const QString baseName = "TaskJuggler_" + QLocale(locale).name();
-    if (translator.load(":/i18n/" + baseName)) {
-      app.installTranslator(&translator);
-      break;
-    }
-  }
+  MyTranslator mTrans(&app);
 
+  // забезпучуємо доступ до enum двох класів та до класа таймера
+  qmlRegisterType<MyLang>("MyLang", 1, 0, "MyLang");
   qmlRegisterType<Timer>("Timer", 1, 0, "MyTimer");
   qmlRegisterType<States>("States", 1, 0, "States");
 
@@ -32,11 +30,11 @@ int main(int argc, char *argv[]) {
   engine.addImportPath(":/ui");
   const QUrl url(QStringLiteral("qrc:/main.qml"));
 
-  // Подключаемся к базе данных
+  // Підключаємося до бази даних
   DataBase database;
   database.connectToDataBase();
 
-  // Объявляем и инициализируем модель данных
+  // Оголошуємо та ініціалізуємо модель даних
   ListModel *model = new ListModel();
 
   QObject::connect(
@@ -46,9 +44,11 @@ int main(int argc, char *argv[]) {
           QCoreApplication::exit(-1);
       },
       Qt::QueuedConnection);
-  // Обеспечиваем доступ к модели и классу для работы с базой данных из QML
+  // Забезпечуємо доступ до моделі, трансляції та класу для роботи з базою даних
+  // з QML
   engine.rootContext()->setContextProperty("myModel", model);
   engine.rootContext()->setContextProperty("database", &database);
+  engine.rootContext()->setContextProperty("mytrans", (QObject *)&mTrans);
   engine.load(url);
 
   return app.exec();

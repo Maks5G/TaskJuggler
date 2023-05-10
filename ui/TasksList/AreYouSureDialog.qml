@@ -5,15 +5,14 @@ MessageDialog {
     property int _state: -1
 
     id: dialogDelete
-    title: qsTr("Зміна стану")
-    text: qsTr("Ви впевнені?")
+    title: qsTr("Change of state") + mytrans.emptyString
+    text: qsTr("Are you sure?") + mytrans.emptyString
     icon: StandardIcon.Question
     standardButtons: StandardButton.Ok | StandardButton.Cancel
 
-    // При положительном ответе ...
+    // При позитивній відповіді ...
     onAccepted: {
-//        database.removeRecord(myModel.getId(tasksView.listView.currentIndex))
         database.updateState(myModel.getId(tasksView.listView.currentIndex), _state);
-        myModel.updateModel();  // Обновляем модель данных
+        myModel.updateModel();  // Обновлюємо модель даних
     }
 }

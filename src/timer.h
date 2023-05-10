@@ -19,10 +19,10 @@ private:
   DataBase *m_db;
 
 public slots:
-  void compareDate();
-  void start(ListModel *model, DataBase *dataBase);
-
-signals:
+  void compareDate(); // перевірка кожного запису на те, чи не прийшов дедлайн
+  void start(ListModel *model,
+             DataBase *dataBase); // умовно конструктор з якого начинаємо все
+                                  // виконувати
 };
 
 #endif // TIMER_H

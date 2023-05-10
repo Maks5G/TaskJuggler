@@ -37,5 +37,7 @@
         <file>ui/TaskDescription/DialogCalendar.qml</file>
         <file>src/timer.h</file>
         <file>src/timer.cpp</file>
+        <file>translations/TaskJuggler_uk_UA.qm</file>
+        <file>ui/assets/TaskJuggler.png</file>
     </qresource>
 </RCC>

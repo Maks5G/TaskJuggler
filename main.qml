@@ -24,7 +24,7 @@ ApplicationWindow {
         id: toolBar
     }
 
-    C1.SplitView {
+    C1.SplitView { // controls 2 трохи некоректно працюють
         id: splitView
         z: -1
         anchors{

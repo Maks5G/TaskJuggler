@@ -3,18 +3,18 @@ import QtQuick.Dialogs 1.3
 
 MessageDialog {
     id: dialogDelete
-    title: qsTr("Удаление записи")
-    text: qsTr("Подтвердите удаление записи из журнала")
+    title: qsTr("Deleting a record") + mytrans.emptyString
+    text: qsTr("Confirm the deletion of the entry from the log") + mytrans.emptyString
     icon: StandardIcon.Warning
     standardButtons: StandardButton.Ok | StandardButton.Cancel
 
-    // При положительном ответе ...
+    // При позитивній відповіді ...
     onAccepted: {
-        /* ... удаляем строку по id,
-         * который забираем из модели данных
-         * по номеру строки в представлении
-         * */
+        /* ... видаляємо рядок за id,
+           * який вибираємо з моделей даних
+           * за номером рядка у поданні
+           * */
         database.removeRecord(myModel.getId(tasksView.listView.currentIndex))
-        myModel.updateModel();  // Обновляем модель данных
+        myModel.updateModel();  // Обновлюємо модель даних
     }
 }

@@ -14,7 +14,9 @@ HEADERS += \
     src/database.h \
     src/listmodel.h \
     src/states.h \
-    src/timer.h
+    src/timer.h \
+    src/translation/mylang.h \
+    src/translation/mytranslator.h
 
 RESOURCES += qml.qrc
 
@@ -33,3 +35,6 @@ QML_DESIGNER_IMPORT_PATH =
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+DISTFILES += \
+    databases/TaskJuggler3.db

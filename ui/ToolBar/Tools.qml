@@ -12,17 +12,16 @@ Row{
 
     ListModel {
         id: model
-        ListElement {listId: "plus"; imgSource: "qrc:/ui/assets/plus.png";}
-        ListElement {listId: "bin"; imgSource: "qrc:/ui/assets/bin.png";}
-        ListElement {listId: "done"; imgSource: "qrc:/ui/assets/done.png";}
-        ListElement {listId: "holdOn"; imgSource: "qrc:/ui/assets/stop-sign.png";}
-        ListElement {listId: "makeInProccess"; imgSource: "qrc:/ui/assets/makeInProccess.png";}
+        ListElement {imgSource: "qrc:/ui/assets/plus.png";}
+        ListElement {imgSource: "qrc:/ui/assets/bin.png";}
+        ListElement {imgSource: "qrc:/ui/assets/done.png";}
+        ListElement {imgSource: "qrc:/ui/assets/stop-sign.png";}
+        ListElement {imgSource: "qrc:/ui/assets/makeInProccess.png";}
     }
 
     Repeater {
         model: model
         Image {
-            id: listId
             source: imgSource
             fillMode: Image.PreserveAspectFit
             height: parent.height

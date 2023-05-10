@@ -7,7 +7,7 @@ Rectangle {
     height: 52
     Text {
         id: orderByText
-        text: qsTr("Order by:")
+        text: qsTr("Order by:") + mytrans.emptyString
         anchors{
             verticalCenter: parent.verticalCenter
             left: parent.left
@@ -16,7 +16,7 @@ Rectangle {
         color: Style.textColor
         font.pixelSize: Style.defaultTextSize
     }
-    Row{
+    Row{ // усі варіації фільтрації
         id: orderRow
         anchors{
             left: orderByText.right
@@ -27,18 +27,17 @@ Rectangle {
         spacing: Style.tinySpacing
         ListModel{
             id: model
-            ListElement{listID: "none"; listText: qsTr("None")}
-            ListElement{listID: "title"; listText: qsTr("Title")}
-            ListElement{listID: "description"; listText: qsTr("Description")}
-            ListElement{listID: "state"; listText: qsTr("State")}
-            ListElement{listID: "start"; listText: qsTr("Start")}
-            ListElement{listID: "end"; listText: qsTr("End")}
+            ListElement{listText: qsTr("None")}
+            ListElement{listText: qsTr("Title")}
+            ListElement{listText: qsTr("Description")}
+            ListElement{listText: qsTr("State")}
+            ListElement{listText: qsTr("Start")}
+            ListElement{listText: qsTr("End")}
         }
 
         Repeater {
             model: model
             Rectangle {
-                id: listID
                 height: orderBy.height
                 width: parent.width / 6 - orderRow.spacing
                 radius: 10
@@ -49,10 +48,10 @@ Rectangle {
                 Text{
                     width: parent.width
                     anchors.centerIn: parent
-                    text: listText
+                    text: listText  + mytrans.emptyString
                     horizontalAlignment: Text.AlignHCenter
                     font.pixelSize: Style.defaultTextSize
-                    elide: Text.ElideMiddle
+                    elide: Text.ElideMiddle // якщо текст не поміщається, то він частково чи повністю замінється 3 крапками
                     color: Style.textColor
                 }
 
@@ -91,7 +90,7 @@ Rectangle {
         }
 
     }
-    Column {
+    Column { // прямий/обернений порядок сортування
         id: ascDesc
         anchors{
             top: parent.top

@@ -9,24 +9,24 @@ ListModel::ListModel(QObject *parent)
   this->updateModel();
 }
 
-// Метод для получения данных из модели
+// Метод отримання даних з моделей
 QVariant ListModel::data(const QModelIndex &index, int role) const {
 
-  // Определяем номер колонки, адрес так сказать, по номеру роли
+  // З'ясовуємо номер колонки, адрес так сказать, по номеру роли
   int columnId = role - Qt::UserRole - 1;
-  // Создаём индекс с помощью новоиспечённого ID колонки
+  // Створюємо індекс за допомогою новоспеченої ідентифікаційної колонки
   QModelIndex modelIndex = this->index(index.row(), columnId);
 
-  /* И с помощью уже метода data() базового класса
-   * вытаскиваем данные для таблицы из модели
+  /* І за допомогою вже методу data() базового класу
+   * вибираємо дані для таблиці з моделей
    * */
   return QSqlQueryModel::data(modelIndex, Qt::DisplayRole);
 }
 
-// Метод для получения имен ролей через хешированную таблицу.
+// Метод отримання імені ролі через хешировану таблицю.
 QHash<int, QByteArray> ListModel::roleNames() const {
-  /* То есть сохраняем в хеш-таблицу названия ролей
-   * по их номеру
+  /* Тобто збереігаємо в хеш-таблиці назви ролей
+   * по їх номеру
    * */
   QHash<int, QByteArray> roles;
   roles[IdRole] = "id";
@@ -38,21 +38,21 @@ QHash<int, QByteArray> ListModel::roleNames() const {
   return roles;
 }
 
-// Метод обновления таблицы в модели представления данных
+// Метод оновлення таблиці в моделі представлення даних
 void ListModel::updateModel() {
-  // Обновление производится SQL-запросом к базе данных
+  // Оновлення виробляється SQL-запитом до бази даних
   this->setQuery("SELECT * FROM " TABLE + m_where + m_orderBy + m_asc_desc);
 }
 
-// Получение id из строки в модели представления данных
+// Отримання id із строки в моделі представлення даних
 int ListModel::getId(int row) {
   return this->data(this->index(row, 0), IdRole).toInt();
 }
-
+// Отримання стану із строки в моделі представлення даних
 int ListModel::getState(int row) {
   return this->data(this->index(row, 0), StateRole).toInt();
 }
-
+// Отримання кінцевої дати із строки в моделі представлення даних
 QString ListModel::getEnd(int row) {
   return this->data(this->index(row, 0), EndRole).toString();
 }
